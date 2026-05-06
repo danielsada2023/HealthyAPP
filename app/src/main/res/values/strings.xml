@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">HealthyAPP</string>
+    <string name="healthyapp">HealthyAPP</string>
+    <string name="correoelectronico">Correo electrónico</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="progreso">Progreso</string>
+    <string name="dieta">Dieta</string>
+    <string name="rutinas">Rutinas</string>
+    <string name="menuprincipal">Menú principal</string>
+    <string name="archivo_dieta_usuario_pdf">Archivo: dieta_usuario.pdf</string>
+    <string name="ver_dieta">Ver dieta</string>
+    <string name="nombre_dieta_equilibrada">Nombre: Dieta equilibrada</string>
+    <string name="mi_dieta">Mi dieta</string>
+    <string name="descripci_n_plan_alimenticio_asignado_por_el_entrenador">Descripción: Plan alimenticio asignado por el entrenador.</string>
+    <string name="resultados_del_usuario">Resultados del usuario</string>
+    <string name="peso_corporal">Peso corporal:</string>
+    <string name="fecha">Fecha:</string>
+    <string name="evoluci_n_del_peso">Evolución del peso</string>
+    <string name="mis_rutinas">Mis rutinas</string>
+    <string name="ver_dieta_pdf_o_imagen">Ver dieta (PDF o imagen)</string>
+    <string name="archivo_disponible">Archivo disponible</string>
+    <string name="descripci_n_de_la_dieta">Descripción de la dieta</string>
+    <string name="nombre_de_la_dieta">Nombre de la dieta</string>
+    <string name="mi_dieta_asignada">Mi dieta asignada</string>
+    <string name="ejercicios_completados">Ejercicios completados</string>
+    <string name="historial_de_progreso">Historial de progreso</string>
+    <string name="s">Fecha:</string>
+    <string name="mis_rutinass">Mis rutinas</string>
+</resources>

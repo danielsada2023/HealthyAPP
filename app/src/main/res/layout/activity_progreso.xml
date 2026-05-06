@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registro de progreso"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etPesoCorporal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Peso corporal"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etGrasaCorporal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Grasa corporal (%)"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etPecho"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pecho"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etCintura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cintura"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etCadera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cadera"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etBicepsIzq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Bíceps izquierdo"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etBicepsDer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Bíceps derecho"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etMusloIzq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Muslo izquierdo"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etMusloDer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Muslo derecho"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/btnGuardarProgreso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar progreso"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+</ScrollView>

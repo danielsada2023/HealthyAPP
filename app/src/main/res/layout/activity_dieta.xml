@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gestión de dieta"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etNombreDieta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre de la dieta"
+            android:layout_marginBottom="10dp" />
+
+        <EditText
+            android:id="@+id/etDescripcionDieta"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:hint="Descripción de la dieta"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnSeleccionarArchivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar PDF o archivo" />
+
+        <TextView
+            android:id="@+id/tvArchivoSeleccionado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ningún archivo seleccionado"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnVerDieta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver dieta" />
+
+        <Button
+            android:id="@+id/btnGuardarDieta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar dieta"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+
+</ScrollView>

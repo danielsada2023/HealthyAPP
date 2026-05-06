@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Menú principal"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvTipoUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Perfil:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btnRutina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crear rutina"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnMisRutinas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mis rutinas"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnDieta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crear dieta"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnVerDieta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver dieta"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnProgreso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar progreso"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnResultados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultados"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar sesión" />
+
+    </LinearLayout>
+
+</ScrollView>
