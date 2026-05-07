@@ -19,38 +19,89 @@ class DietaUsuarioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dieta_usuario)
 
-        val tvNombreDieta = findViewById<TextView>(R.id.tvNombreDietaUsuario)
-        val tvDescripcionDieta = findViewById<TextView>(R.id.tvDescripcionDietaUsuario)
-        val tvArchivoDieta = findViewById<TextView>(R.id.tvArchivoDietaUsuario)
-        val btnVerDieta = findViewById<Button>(R.id.btnVerDietaUsuario)
+        val tvNombreDieta =
+            findViewById<TextView>(R.id.tvNombreDietaUsuario)
+
+        val tvDescripcionDieta =
+            findViewById<TextView>(R.id.tvDescripcionDietaUsuario)
+
+        val tvArchivoDieta =
+            findViewById<TextView>(R.id.tvArchivoDietaUsuario)
+
+        val btnVerDieta =
+            findViewById<Button>(R.id.btnVerDietaUsuario)
 
         val db = AppDatabase.getDatabase(this)
 
         lifecycleScope.launch {
-            val dieta = db.dietaDao().obtenerDietaUsuario(1)
+
+            val dieta =
+                db.dietaDao()
+                    .obtenerDietaUsuario(1)
 
             if (dieta != null) {
-                tvNombreDieta.text = "Nombre: ${dieta.nombre}"
-                tvDescripcionDieta.text = "Descripción: ${dieta.descripcion}"
-                tvArchivoDieta.text = "Archivo: dieta asignada"
+
+                tvNombreDieta.text =
+                    "Nombre: ${dieta.nombre}"
+
+                tvDescripcionDieta.text =
+                    "Descripción: ${dieta.descripcion}"
+
+                tvArchivoDieta.text =
+                    "Archivo: dieta asignada"
+
                 archivoUri = dieta.archivo
+
             } else {
-                tvNombreDieta.text = "No hay dieta asignada"
+
+                tvNombreDieta.text =
+                    "No hay dieta asignada"
+
                 tvDescripcionDieta.text = ""
+
                 tvArchivoDieta.text = ""
             }
         }
 
         btnVerDieta.setOnClickListener {
-            if (archivoUri != null) {
-                val uri = Uri.parse(archivoUri)
 
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.setDataAndType(uri, contentResolver.getType(uri))
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                startActivity(intent)
+            if (!archivoUri.isNullOrEmpty()) {
+
+                try {
+
+                    val uri =
+                        Uri.parse(archivoUri)
+
+                    val intent =
+                        Intent(Intent.ACTION_VIEW)
+
+                    intent.setDataAndType(
+                        uri,
+                        contentResolver.getType(uri)
+                    )
+
+                    intent.addFlags(
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+
+                    startActivity(intent)
+
+                } catch (e: Exception) {
+
+                    Toast.makeText(
+                        this,
+                        "No se puede abrir el archivo",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
             } else {
-                Toast.makeText(this, "No hay archivo de dieta disponible", Toast.LENGTH_SHORT).show()
+
+                Toast.makeText(
+                    this,
+                    "No hay archivo de dieta disponible",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

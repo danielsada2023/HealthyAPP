@@ -1,13 +1,10 @@
 package com.example.healthyapp
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.healthyapp.database.AppDatabase
@@ -17,13 +14,26 @@ import kotlinx.coroutines.launch
 class DietaActivity : AppCompatActivity() {
 
     private var archivoUri: Uri? = null
-    private lateinit var tvArchivoSeleccionado: TextView
 
     private val seleccionarArchivo =
-        registerForActivityResult(androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+
+            if (result.resultCode == RESULT_OK) {
+
                 archivoUri = result.data?.data
-                tvArchivoSeleccionado.text = "Archivo seleccionado correctamente"
+
+                archivoUri?.let { uri ->
+
+                    contentResolver.takePersistableUriPermission(
+                        uri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                }
+
+                findViewById<TextView>(R.id.tvArchivoSeleccionado).text =
+                    "Archivo seleccionado correctamente"
             }
         }
 
@@ -31,60 +41,121 @@ class DietaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dieta)
 
-        val etNombreDieta = findViewById<EditText>(R.id.etNombreDieta)
-        val etDescripcionDieta = findViewById<EditText>(R.id.etDescripcionDieta)
+        val etNombre =
+            findViewById<EditText>(R.id.etNombreDieta)
 
-        val btnSeleccionarArchivo = findViewById<Button>(R.id.btnSeleccionarArchivo)
-        val btnVerDieta = findViewById<Button>(R.id.btnVerDieta)
-        val btnGuardarDieta = findViewById<Button>(R.id.btnGuardarDieta)
+        val etDescripcion =
+            findViewById<EditText>(R.id.etDescripcionDieta)
 
-        tvArchivoSeleccionado = findViewById(R.id.tvArchivoSeleccionado)
+        val btnSeleccionar =
+            findViewById<Button>(R.id.btnSeleccionarArchivo)
+
+        val btnGuardar =
+            findViewById<Button>(R.id.btnGuardarDieta)
+
+        val btnVer =
+            findViewById<Button>(R.id.btnVerDieta)
 
         val db = AppDatabase.getDatabase(this)
 
-        btnSeleccionarArchivo.setOnClickListener {
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        btnSeleccionar.setOnClickListener {
+
+            val intent =
+                Intent(Intent.ACTION_OPEN_DOCUMENT)
+
             intent.type = "*/*"
-            intent.addCategory(Intent.CATEGORY_OPENABLE)
-            intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/pdf", "image/*"))
+
+            intent.addCategory(
+                Intent.CATEGORY_OPENABLE
+            )
+
+            intent.addFlags(
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+
+            intent.addFlags(
+                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+            )
+
+            intent.putExtra(
+                Intent.EXTRA_MIME_TYPES,
+                arrayOf(
+                    "application/pdf",
+                    "image/*"
+                )
+            )
+
             seleccionarArchivo.launch(intent)
         }
 
-        btnVerDieta.setOnClickListener {
+        btnVer.setOnClickListener {
+
             if (archivoUri != null) {
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.setDataAndType(archivoUri, contentResolver.getType(archivoUri!!))
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+                val intent =
+                    Intent(Intent.ACTION_VIEW)
+
+                intent.setDataAndType(
+                    archivoUri,
+                    contentResolver.getType(archivoUri!!)
+                )
+
+                intent.addFlags(
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+
                 startActivity(intent)
+
             } else {
-                Toast.makeText(this, "Selecciona un archivo primero", Toast.LENGTH_SHORT).show()
+
+                Toast.makeText(
+                    this,
+                    "No hay archivo seleccionado",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
-        btnGuardarDieta.setOnClickListener {
-            val nombre = etNombreDieta.text.toString()
-            val descripcion = etDescripcionDieta.text.toString()
-            val archivo = archivoUri?.toString()
+        btnGuardar.setOnClickListener {
 
-            if (nombre.isEmpty() || descripcion.isEmpty()) {
-                Toast.makeText(this, "Introduce nombre y descripción", Toast.LENGTH_SHORT).show()
-            } else {
-                val dieta = Dieta(
-                    nombre = nombre,
-                    descripcion = descripcion,
-                    archivo = archivo,
-                    idUsuario = 1
-                )
+            val nombre =
+                etNombre.text.toString()
 
-                lifecycleScope.launch {
-                    db.dietaDao().insertarDieta(dieta)
+            val descripcion =
+                etDescripcion.text.toString()
 
-                    Toast.makeText(
-                        this@DietaActivity,
-                        "Dieta guardada correctamente",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+            if (nombre.isEmpty() ||
+                descripcion.isEmpty()
+            ) {
+
+                Toast.makeText(
+                    this,
+                    "Rellena todos los campos",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                return@setOnClickListener
+            }
+
+            val dieta = Dieta(
+                nombre = nombre,
+                descripcion = descripcion,
+                archivo = archivoUri?.toString(),
+                idUsuario = 1
+            )
+
+            lifecycleScope.launch {
+
+                db.dietaDao()
+                    .insertarDieta(dieta)
+
+                Toast.makeText(
+                    this@DietaActivity,
+                    "Dieta guardada correctamente",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                finish()
             }
         }
     }
